@@ -256,9 +256,8 @@ const products = [
         name: "Volta Pro Tournament Net",
         category: "net",
         price: 3599,
-        image: "img/NET.png",
+        image: "img/NET 2.jpg",
         images: [
-            "img/NET.png",
             "img/NET 2.jpg",
             "img/NET 3.jpg"
         ],
