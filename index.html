@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volta - Table Tennis Equipment</title>
+    <link rel="icon" href="img/favico.png" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container nav-content">
+            <a href="index.html" class="logo"><img src="img/logo.png" alt="Volta Logo"
+                    style="height: 30px; display: block;"></a>
+            <ul class="nav-links">
+                <li><a href="index.html#home" class="nav-link active">Home</a></li>
+                <li><a href="shop.html" class="nav-link">Shop</a></li>
+                <li><a href="#about" class="nav-link">About Us</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button id="open-cart-btn" class="cart-btn" aria-label="Open Cart">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    <span id="cart-count" class="cart-count">0</span>
+                </button>
+                <div id="hamburger-menu" class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1 class="hero-title">Dominate <span>The Table</span></h1>
+            <p class="hero-subtitle">Premium equipment for champions. Discover our new carbon velocity series engineered
+                for ultimate speed and spin.</p>
+            <div class="hero-buttons">
+                <a href="shop.html" class="btn btn-primary">Shop Now</a>
+                <a href="#about" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Shop Section -->
+    <section class="shop-section" id="shop">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Gear</h2>
+                <p class="accent">Precision crafted for pros and enthusiasts</p>
+            </div>
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="racket">Rackets</button>
+                <button class="filter-btn" data-filter="ball">Balls</button>
+                <button class="filter-btn" data-filter="net">Nets</button>
+            </div>
+            <div id="products-grid" class="products-grid">
+                <!-- Products dynamically rendered here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Engineered for <span class="accent">Victory</span></h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 2rem;">At Volta, we believe that the right
+                        equipment can elevate your game. Our products are rigorously tested by professionals to ensure
+                        the perfect balance of speed, spin, and control.</p>
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <h3>10k+</h3>
+                            <p class="accent">Happy Players</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>50+</h3>
+                            <p class="accent">Pro Tournaments</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Optional: add an image here -->
+                <div class="about-image-standin"
+                    style="background: var(--surface-color-2); border-radius: var(--border-radius-lg); height: 400px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                    <img src="img/shop.png" alt="Table Tennis Shop"
+                        style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo"><img src="img/logo.png" alt="Volta Logo"
+                            style="height: 30px; display: block;"></a>
+                    <p>Elevating the sport of table tennis with precision-engineered equipment for players of all
+                        levels.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <a href="index.html#home">Home</a>
+                    <a href="shop.html">Shop</a>
+                    <a href="#about">About Us</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="footer-newsletter">
+                    <h4>Stay Updated</h4>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.9rem;">Subscribe for news
+                        and special offers.</p>
+                    <form class="newsletter-form" onsubmit="event.preventDefault();">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit" class="btn btn-primary" style="padding: 0.8rem 1rem;">Go</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Volta Sports. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Overlay & Drawer -->
+    <div id="cart-overlay" class="cart-overlay"></div>
+    <div id="cart-drawer" class="cart-drawer">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <button id="close-cart-btn" class="close-btn" aria-label="Close Cart">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div id="cart-items" class="cart-items">
+            <!-- Cart items dynamically rendered here -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-total-price">Rs. 0.00</span>
+            </div>
+            <button class="btn btn-primary btn-block" onclick="window.location.href='checkout.html'">Proceed to
+                Checkout</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/products.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>

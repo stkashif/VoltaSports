@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Received - Volta</title>
+    <link rel="icon" href="img/favico.png" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .order-received-wrap {
+            padding: 120px 0 80px;
+            background-color: var(--bg-color);
+            min-height: 80vh;
+        }
+
+        .success-message {
+            background: rgba(74, 222, 128, 0.1);
+            color: #4ade80;
+            padding: 1.5rem;
+            border-radius: var(--border-radius-sm);
+            border: 1px dashed #4ade80;
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .summary-block {
+            background: var(--surface-color-1);
+            padding: 2.5rem;
+            border-radius: var(--border-radius-lg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .summary-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .order-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .order-table th,
+        .order-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .order-table th {
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .order-table td {
+            vertical-align: middle;
+        }
+
+        .order-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .item-details {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .item-details img {
+            width: 50px;
+            height: 50px;
+            background: #ffffff;
+            border-radius: var(--border-radius-sm);
+            object-fit: contain;
+            padding: 5px;
+        }
+
+        .item-name {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .totals-section {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: flex-end;
+        }
+
+        .totals-row {
+            display: flex;
+            justify-content: space-between;
+            width: 300px;
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .totals-row.grand-total {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent-red);
+            padding-top: 1rem;
+            border-top: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container nav-content">
+            <a href="index.html" class="logo"><img src="img/logo.png" alt="Volta Logo"
+                    style="height: 30px; display: block;"></a>
+            <ul class="nav-links">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="shop.html" class="nav-link">Shop</a></li>
+                <li><a href="index.html#about" class="nav-link">About Us</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="order-received-wrap">
+        <div class="container">
+            <div class="success-message">
+                Thank you. Your order has been received.
+            </div>
+
+            <div class="summary-block">
+                <h2 class="summary-title">Order Summary</h2>
+
+                <table class="order-table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th style="text-align: center;">Qty</th>
+                            <th style="text-align: right;">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="order-items-summary">
+                        <!-- Populated via JS -->
+                    </tbody>
+                </table>
+
+                <div class="totals-section">
+                    <div class="totals-row">
+                        <span>Shipping:</span>
+                        <span>Rs. 250</span>
+                    </div>
+                    <div class="totals-row">
+                        <span>Payment Method:</span>
+                        <span style="color: var(--text-primary);">Cash on delivery</span>
+                    </div>
+                    <div class="totals-row grand-total">
+                        <span>Total:</span>
+                        <span id="order-grand-total">Rs. 0</span>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 3rem;">
+                    <a href="shop.html" class="btn btn-primary">Continue Shopping</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tableBody = document.getElementById('order-items-summary');
+            const totalEl = document.getElementById('order-grand-total');
+
+            // Retrieve last order details stored in checkout.js
+            const orderData = JSON.parse(localStorage.getItem('volta_last_order'));
+
+            if (!orderData || !orderData.cart || orderData.cart.length === 0) {
+                // If they bypassed checkout to get here
+                tableBody.innerHTML = '<tr><td colspan="3" style="text-align: center; color: var(--text-secondary);">No order data found.</td></tr>';
+                return;
+            }
+
+            // Render table
+            orderData.cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>
+                        <div class="item-details">
+                            <img src="${item.image}" alt="${item.name}">
+                            <span class="item-name">${item.name}</span>
+                        </div>
+                    </td>
+                    <td style="text-align: center;">${item.quantity}</td>
+                    <td style="text-align: right; font-weight: 600;">Rs. ${itemTotal.toLocaleString()}</td>
+                `;
+                tableBody.appendChild(tr);
+            });
+
+            // Put grand total
+            totalEl.textContent = orderData.total;
+        });
+    </script>
+</body>
+
+</html>
